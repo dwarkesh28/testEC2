@@ -35,17 +35,49 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse and execute the HTML template
 	tmpl, err := template.New("home").Parse(`
 		<!DOCTYPE html>
-		<html lang="en">
-		<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>{{.Title}}</title>
-		</head>
-		<body>
-			<h1>{{.Title}}</h1>
-			<p>{{.Message}}</p>
-		</body>
-		</html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #232526, #414345);
+            background-size: 400% 400%;
+            animation: gradientBG 20s infinite ease-in-out;
+            text-align: center;
+            color: white;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h1 {
+            font-size: 4em;
+            animation: fadeIn 5s ease-in-out infinite alternate;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Coming Soon</h1>
+</body>
+</html>
+
 	`)
 	if err != nil {
 		http.Error(w, "Error parsing template", http.StatusInternalServerError)
