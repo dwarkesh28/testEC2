@@ -8,11 +8,16 @@ import (
 
 // HomePageData holds data for the home page
 type HomePageData struct {
-	Title string
+	Title   string
 	Message string
 }
 
 func main() {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered from panic:", r)
+		}
+	}()
 	// Serve static files (optional, if you have assets like CSS or JS)
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("assets"))))
 
@@ -27,6 +32,7 @@ func main() {
 // homeHandler handles the "/" route
 func homeHandler(w http.ResponseWriter, r *http.Request) {
 	// Define data to be passed into the template
+
 	data := HomePageData{
 		Title:   "Welcome to My Go App",
 		Message: "Hello, this is a simple Go app using templates and routes!",
